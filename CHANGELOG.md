@@ -15,12 +15,15 @@
 ### Alterado
 - `site/index.html`: agora é **gerado** pelo generator.py — não editar manualmente
 - `AGENTS.md`: estrutura atualizada com `src/`, workflow do gerador, nomenclatura JSON/templates
+- `src/data/livro.json`: ícone do WhatsApp alterado de emoji (💬) para SVG verde (#25D366) — mais reconhecível e alinhado com a marca
+- `root_path` no generator.py: retorna "." para paths relativos corretos em localhost
 
 ### Analytics
 - **Arquivos novos:** 6 (src/data/livro.json, src/generator/*.py, templates/*.html, requirements.txt)
-- **Arquivos alterados:** 2 (AGENTS.md, site/index.html)
+- **Arquivos alterados:** 3 (AGENTS.md, site/index.html, src/data/livro.json)
 - **Gerador:** `python3 src/generator/generator.py` → `site/index.html` (saída validada)
 - **Backup:** site/ completo em `../backups/livrodebrega/` antes da migração
+- **Ícone WhatsApp:** emoji → SVG verde (mais reconhecível)
 
 ## [0.4] — 2026-07-22
 
