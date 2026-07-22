@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ livro.seo.title }}</title>
+  <meta name="description" content="{{ livro.seo.description }}">
+  <meta name="author" content="{{ livro.seo.author }}">
+  <meta name="theme-color" content="{{ livro.seo.theme_color }}">
+  <link rel="canonical" href="{{ livro.seo.domain }}/">
+  <link rel="icon" type="image/png" href="{{ root_path }}/{{ livro.seo.favicon }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ livro.seo.title }}">
+  <meta property="og:description" content="{{ livro.seo.description }}">
+  <meta property="og:url" content="{{ livro.seo.domain }}/">
+  <meta property="og:site_name" content="As Décadas do Brega Paraense">
+  <meta property="og:locale" content="{{ livro.seo.locale }}">
+  <meta property="og:image" content="{{ livro.seo.og_image }}">
+  <meta property="og:image:width" content="{{ livro.seo.og_image_width }}">
+  <meta property="og:image:height" content="{{ livro.seo.og_image_height }}">
+  <meta property="og:image:type" content="{{ livro.seo.og_image_type }}">
+  <meta property="og:image:alt" content="{{ livro.seo.og_image_alt }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ livro.seo.title }}">
+  <meta name="twitter:description" content="{{ livro.seo.description }}">
+  <meta name="twitter:image" content="{{ livro.seo.og_image }}">
+  <meta name="twitter:image:alt" content="{{ livro.seo.og_image_alt }}">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": {{ livro.seo.title | tojson }},
+    "author": {
+      "@type": "Person",
+      "name": {{ livro.seo.author | tojson }}
+    },
+    "description": {{ livro.seo.description | tojson }},
+    "isbn": {{ livro.isbn | tojson }},
+    "inLanguage": "pt-BR",
+    "countryOfOrigin": { "@type": "Country", "name": "Brasil" },
+    "url": "{{ livro.seo.domain }}/",
+    "image": "{{ livro.seo.og_image }}"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Antonio:wght@300;400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ root_path }}/css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <span class="topbar-title">{{ livro.topbar_title }}</span>
+    <a href="{{ root_path }}/{{ livro.pdf_download }}" class="btn btn-small btn-green" download>Baixar E-book</a>
+  </div>
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p>&copy; {{ livro.footer.copyright_year }} Todos os direitos reservados. Desenvolvido por <a href="{{ livro.footer.developer_url }}" target="_blank">{{ livro.footer.developed_by }}</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>

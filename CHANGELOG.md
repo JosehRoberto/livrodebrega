@@ -2,6 +2,26 @@
 
 > Formato [Keep a Changelog](https://keepachangelog.com/), mais recente primeiro.
 
+## [0.5] — 2026-07-22
+
+### Adicionado
+- `src/data/livro.json`: conteúdo textual completo (seo, hero, about, author, social, contact, footer)
+- `src/generator/generator.py`: script de geração HTML (Python + Jinja2)
+- `src/generator/schemas.py`: validação Pydantic do JSON
+- `src/generator/templates/base.html`: layout base com head, header, footer
+- `src/generator/templates/pages/index.html`: template da landing page
+- `requirements.txt`: dependências (Jinja2, pydantic)
+
+### Alterado
+- `site/index.html`: agora é **gerado** pelo generator.py — não editar manualmente
+- `AGENTS.md`: estrutura atualizada com `src/`, workflow do gerador, nomenclatura JSON/templates
+
+### Analytics
+- **Arquivos novos:** 6 (src/data/livro.json, src/generator/*.py, templates/*.html, requirements.txt)
+- **Arquivos alterados:** 2 (AGENTS.md, site/index.html)
+- **Gerador:** `python3 src/generator/generator.py` → `site/index.html` (saída validada)
+- **Backup:** site/ completo em `../backups/livrodebrega/` antes da migração
+
 ## [0.4] — 2026-07-22
 
 ### Adicionado

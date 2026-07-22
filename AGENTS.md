@@ -26,7 +26,18 @@ livrodebrega/
 │   ├── css/style.css
 │   ├── img/            # livro-brega-500.png, juniorneves-600.jpg, favicon.png
 │   ├── pdf/livro.pdf
-│   └── index.html
+│   └── index.html      # GERADO — não editar manualmente
+├── src/                # Código fonte do gerador
+│   ├── data/
+│   │   └── livro.json  # Conteúdo textual (editar aqui)
+│   └── generator/
+│       ├── __init__.py
+│       ├── generator.py    # Script de geração (Python + Jinja2)
+│       ├── schemas.py      # Validação Pydantic
+│       └── templates/
+│           ├── base.html
+│           └── pages/
+│               └── index.html
 ├── docs/
 │   ├── PLANO.md        # Planejamento estratégico (11 fases, incluindo deploy e SEO)
 │   ├── plano-de-atualizacao.md  # Plano de migração para gerador JSON+Jinja2
@@ -36,6 +47,7 @@ livrodebrega/
 ├── AGENTS.md
 ├── CHANGELOG.md
 ├── README.md
+├── requirements.txt
 └── .gitignore
 ```
 
@@ -84,7 +96,8 @@ livrodebrega/
 
 ## Workflow
 
-- Plain HTML/CSS, no build system, no framework
+- Gerador Python + Jinja2: conteúdo em JSON → templates → HTML
+- Para regenerar: `python3 src/generator/generator.py`
 - `site/` é o diretório de publicação (Cloudflare Pages output: `/site`)
 - Deploy contínuo via `git push` na `main`
 - Remote: `git@github-joseroberto_org:JosehRoberto/livrodebrega.git`

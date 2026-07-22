@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>{{ livro.hero.title | safe }}</h1>
+        <p class="hero-subtitle">{{ livro.hero.subtitle }}</p>
+        <p class="hero-author">{{ livro.hero.author }}</p>
+        <a href="{{ root_path }}/{{ livro.pdf_download }}" class="btn btn-primary" download>
+          Baixar o E-book
+        </a>
+      </div>
+      <div class="hero-media">
+        <div class="video-wrapper">
+          <iframe class="video-vertical" src="https://www.youtube.com/embed/{{ livro.youtube_id }}" title="As Décadas do Brega Paraense" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container">
+      <p class="isbn">{{ livro.about.heading }}</p>
+      <div class="about-grid">
+      <div class="about-text">
+        {% for par in livro.about.paragraphs %}
+        <p>{{ par }}</p>
+        {% endfor %}
+        <p class="about-signoff">{{ livro.about.signoff }}</p>
+      </div>
+      <div class="about-cover">
+        <img src="{{ root_path }}/{{ livro.about.cover }}" alt="{{ livro.about.cover_alt }}" width="250" height="375" loading="lazy">
+      </div>
+      </div>
+      <div class="about-cta">
+        <a href="{{ root_path }}/{{ livro.pdf_download }}" class="btn btn-primary" download>Baixar o E-book</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="author">
+    <div class="container author-grid">
+      <div class="author-image">
+        <img src="{{ root_path }}/{{ livro.author.photo }}" alt="{{ livro.author.photo_alt }}" width="300" height="300" loading="lazy">
+      </div>
+      <div class="author-content">
+        <h2>{{ livro.author.name }}</h2>
+        {% for par in livro.author.paragraphs %}
+        <p>{{ par }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="social">
+    <div class="container">
+      <h2>{{ livro.social.heading }}</h2>
+      <div class="social-links">
+        {% for link in livro.social.links %}
+        <a href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.aria_label }}">
+          {{ link.svg | safe }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="container">
+      <h2>{{ livro.contact.heading }}</h2>
+      <div class="contact-grid">
+        {% for item in livro.contact["items"] %}
+        <a href="{{ item.url }}" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-icon">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
