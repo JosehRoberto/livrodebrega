@@ -199,7 +199,67 @@ livrodebrega/
     git push
     ```
 
-### Fase 10 — Checklist de Verificação
+### Fase 10 — SEO, Open Graph e Boas Práticas W3C
+
+40. **Analisar head atual** e identificar carências:
+
+    | Tag | Status | Por quê |
+    |-----|--------|---------|
+    | `og:image` (URL absoluta) | ❌ relativo | Facebook/Twitter não resolvem caminho relativo |
+    | `og:url` (canonical) | ❌ ausente | Plataformas não sabem URL canônica |
+    | `og:locale` | ❌ ausente | Perde definição de idioma/região |
+    | `og:site_name` | ❌ ausente | Preview sem identidade da marca |
+    | `og:image:width/height` | ❌ ausente | Plataformas podem cortar a imagem |
+    | `twitter:image:alt` | ❌ ausente | Acessibilidade no preview |
+    | `<link rel="canonical">` | ❌ ausente | SEO prejudicado |
+    | `<meta name="author">` | ❌ ausente | Metadado de autoria |
+    | `<meta name="theme-color">` | ❌ ausente | Barra do navegador sem identidade visual |
+    | Structured data (JSON-LD) | ❌ ausente | Buscadores não indexam como "Book" |
+
+41. **Corrigir todas as URLs de imagem** para absolutas com domínio de produção:
+    ```html
+    <meta property="og:image" content="https://livrodebrega.juniorneves.com/img/livro-brega-500.png">
+    ```
+
+42. **Adicionar metatags essenciais** no `<head>`:
+
+    ```html
+    <meta name="author" content="Junior Neves">
+    <meta name="theme-color" content="#070D1A">
+    <link rel="canonical" href="https://livrodebrega.juniorneves.com/">
+    <meta property="og:url" content="https://livrodebrega.juniorneves.com/">
+    <meta property="og:site_name" content="As Décadas do Brega Paraense">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="375">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="Capa do e-book As Décadas do Brega Paraense">
+    <meta name="twitter:image:alt" content="Capa do e-book As Décadas do Brega Paraense">
+    ```
+
+43. **Adicionar Structured Data (JSON-LD)** para tipo `Book` com ISBN, autor e descrição:
+
+    ```json
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "As Décadas do Brega Paraense — O ritmo, a festa e os cantores",
+      "author": { "@type": "Person", "name": "Junior Neves" },
+      "isbn": "978-65-5391-180-2",
+      "inLanguage": "pt-BR",
+      "url": "https://livrodebrega.juniorneves.com/",
+      "image": "https://livrodebrega.juniorneves.com/img/livro-brega-500.png"
+    }
+    ```
+
+44. **Validar com ferramentas online**:
+    - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) — inspecionar OG tags
+    - [Twitter Card Validator](https://cards-dev.twitter.com/validator) — validar Twitter Card
+    - [Google Rich Results Test](https://search.google.com/test/rich-results) — testar JSON-LD
+    - [W3C Validator](https://validator.w3.org/) — validar HTML
+    - [PageSpeed Insights](https://pagespeed.web.dev/) — performance mobile/desktop
+
+### Fase 11 — Checklist de Verificação
 
 - [ ] `https://livrodebrega.pages.dev` carrega corretamente
 - [ ] `https://livrodebrega.juniorneves.com` redireciona para o Pages
@@ -211,8 +271,12 @@ livrodebrega/
 - [ ] PDF do e-book baixa corretamente
 - [ ] Links das redes sociais abrem as URLs corretas
 - [ ] WhatsApp/telefone/email clicáveis
-- [ ] OG tags funcionam (compartilhamento em redes)
 - [ ] Favicon aparece na aba do navegador
+- [ ] **OG tags** — testado no Facebook Sharing Debugger (imagem, título, descrição, URL)
+- [ ] **Twitter Card** — testado no Twitter Card Validator (summary_large_image com imagem)
+- [ ] **JSON-LD** — aprovado no Google Rich Results Test
+- [ ] **HTML** — sem erros no W3C Validator
+- [ ] **Theme-color** — barra do navegador exibe azul escuro `#070D1A`
 
 ## Princípios
 
