@@ -17,7 +17,7 @@ def load_json(path: Path) -> dict:
 def rel_root(output_path: Path) -> str:
     depth = len(output_path.relative_to(SITE_DIR).parent.parts)
     if depth == 0:
-        return ""
+        return "."
     return "/".join([".."] * depth)
 
 
