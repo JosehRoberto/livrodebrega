@@ -12,8 +12,10 @@
 - `site/img/juniorneves-600.jpg` — foto do autor (copiada de `origem/`)
 - `site/img/favicon.png` — favicon (copiado de `origem/`)
 - `site/pdf/livro.pdf` — e-book para download (copiado de `origem/`)
-- `docs/PLANO.md` — planejamento estratégico (10 fases, incluindo deploy)
+- `docs/PLANO.md` — planejamento estratégico (11 fases, incluindo deploy e SEO)
 - `docs/prompts.md` — registro de prompts
+- `site/index.html` — JSON-LD structured data (schema.org/Book) com ISBN
+- `site/index.html` — metatags: `author`, `theme-color`, `canonical`, `og:url`, `og:locale`, `og:site_name`, `og:image:width/height/type/alt`, `twitter:image:alt`
 
 ### Changed
 - `espelho/.../b-v2.html` — YouTube ID `nhF9ccUUQiY` → `WoZWzrQLNWw`
@@ -27,3 +29,5 @@
 - `site/PLANO.md` movido para `docs/PLANO.md`
 - Remote configurado: `git@github-joseroberto_org:JosehRoberto/livrodebrega.git`
 - Repositório iniciado e push realizado para `JosehRoberto/livrodebrega`
+- `og:image` e `twitter:image` — caminho relativo → URL absoluta (`https://livrodebrega.juniorneves.com/img/...`)
+- `docs/PLANO.md` — adicionada Fase 10 (SEO, OG e W3C) com diagnóstico e ferramentas de validação
