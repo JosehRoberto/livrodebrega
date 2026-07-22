@@ -1,0 +1,1 @@
+Alterar o vídeo do Youtube que está embutido no arquivo espelho/go.pedrosobral.com.br/comunidade-subido-de-trafego/inscricoes-abertas/b-v2.html para abrir o seguinte vídeo: https://www.youtube.com/watch?v=WoZWzrQLNWw

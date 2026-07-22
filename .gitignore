@@ -1,0 +1,7 @@
+# Assets fontes locais (não sobem para o Pages)
+origem/
+espelho/
+
+# Sistema
+.DS_Store
+Thumbs.db
