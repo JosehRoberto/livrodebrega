@@ -42,13 +42,22 @@ Landing page responsiva de página única (HTML+CSS), sem build system ou framew
 ## Estrutura de Diretórios
 
 ```
-site/
-├── index.html          # Landing page principal (único arquivo)
-├── style.css           # Estilos customizados
-└── PLANO.md
+livrodebrega/
+├── site/               # Publicado (Cloudflare Pages)
+│   ├── css/style.css
+│   ├── img/            # livro-brega-500.png, juniorneves-600.jpg, favicon.png
+│   ├── pdf/livro.pdf
+│   └── index.html
+├── docs/
+│   ├── PLANO.md
+│   └── prompts.md
+├── origem/             # Fonte do conteúdo — não publicado
+├── espelho/            # Referência visual Framer — não publicado
+├── AGENTS.md
+├── CHANGELOG.md
+├── README.md
+└── .gitignore
 ```
-
-Observação: assets (imagens, vídeo, PDF) são referenciados via URL absoluta a partir do Framer CDN (`framerusercontent.com/`) ou diretamente de `../origem/`. Nenhum asset é copiado para `site/`.
 
 ## Etapas de Implementação
 
@@ -111,21 +120,34 @@ Observação: assets (imagens, vídeo, PDF) são referenciados via URL absoluta 
 
 25. **Criar repositório no GitHub** (`JosehRoberto/livrodebrega`) — **sem** README, .gitignore ou licença (para evitar conflito no push).
 
-26. **Vincular remote e fazer push:**
+26. **Verificar se existe chave SSH específica no `~/.ssh/config`:**
 
     ```bash
-    git remote add origin git@github.com:JosehRoberto/livrodebrega.git
+    # Exemplo de configuração encontrada no projeto juniorneves-bot:
+    Host github-joseroberto_org
+      HostName github.com
+      User git
+      IdentityFile ~/.ssh/id_ed25519_joseroberto_org
+      IdentitiesOnly yes
+    ```
+
+27. **Vincular remote (usando o host SSH customizado) e fazer push:**
+
+    ```bash
+    git remote add origin git@github-joseroberto_org:JosehRoberto/livrodebrega.git
     git branch -M main
     git push -u origin main
     ```
 
+    > Usar `github-joseroberto_org` em vez de `github.com` garante que a chave SSH correta (`id_ed25519_joseroberto_org`) seja usada para autenticação no repositório da conta `JosehRoberto`.
+
 ### Fase 7 — Cloudflare Pages
 
-27. **Acessar** [Cloudflare Dashboard](https://dash.cloudflare.com/) > **Workers & Pages** > **Create application** > **Pages**.
+28. **Acessar** [Cloudflare Dashboard](https://dash.cloudflare.com/) > **Workers & Pages** > **Create application** > **Pages**.
 
-28. **Conectar ao GitHub**: autorizar Cloudflare Pages a acessar o repositório `JosehRoberto/livrodebrega`.
+29. **Conectar ao GitHub**: autorizar Cloudflare Pages a acessar o repositório `JosehRoberto/livrodebrega`.
 
-29. **Configurar o projeto:**
+30. **Configurar o projeto:**
 
     | Campo | Valor |
     |-------|-------|
@@ -136,15 +158,15 @@ Observação: assets (imagens, vídeo, PDF) são referenciados via URL absoluta 
     | **Build output directory** | `/site` ← **ESSENCIAL**: apontar para dentro do monorepo |
     | **Root directory** | _(deixar vazio)_ |
 
-30. **Aguardar primeiro deploy** — Cloudfare Pages faz o build automático ao detectar o push na `main`.
+31. **Aguardar primeiro deploy** — Cloudfare Pages faz o build automático ao detectar o push na `main`.
 
-31. **Verificar URL padrão**: `https://livrodebrega.pages.dev` — testar se o site carrega.
+32. **Verificar URL padrão**: `https://livrodebrega.pages.dev` — testar se o site carrega.
 
 ### Fase 8 — Domínio Personalizado
 
-32. **Acessar DNS do domínio** `juniorneves.com` (onde quer que ele esteja hospedado — Cloudflare, Registro.br, etc.).
+33. **Acessar DNS do domínio** `juniorneves.com` (onde quer que ele esteja hospedado — Cloudflare, Registro.br, etc.).
 
-33. **Adicionar registro CNAME:**
+34. **Adicionar registro CNAME:**
 
     | Tipo | Nome | Alvo |
     |------|------|------|
@@ -152,23 +174,23 @@ Observação: assets (imagens, vídeo, PDF) são referenciados via URL absoluta 
 
     ⏱ **Propagação DNS**: 1-60 minutos (geralmente <5 min no Cloudflare).
 
-34. **No Cloudflare Pages**, ir em **livrodebrega** > **Custom domains** > **Set up a custom domain**:
+35. **No Cloudflare Pages**, ir em **livrodebrega** > **Custom domains** > **Set up a custom domain**:
 
     - Digitar `livrodebrega.juniorneves.com`
     - Cloudflare Pages verifica automaticamente o CNAME e emite certificado SSL (Let's Encrypt)
 
-35. **Aguardar certificado SSL** (geralmente <30s).
+36. **Aguardar certificado SSL** (geralmente <30s).
 
-36. **Testar** `https://livrodebrega.juniorneves.com` — deve redirecionar para o Pages.
+37. **Testar** `https://livrodebrega.juniorneves.com` — deve redirecionar para o Pages.
 
 ### Fase 9 — Deploy Contínuo
 
-37. A cada `git push` na branch `main`, o Cloudflare Pages automaticamente:
+38. A cada `git push` na branch `main`, o Cloudflare Pages automaticamente:
     - Detecta mudanças no diretório `site/`
     - Faz deploy incremental
     - Invalida cache do CDN global
 
-38. **Workflow de atualização:**
+39. **Workflow de atualização:**
 
     ```bash
     # Editar, testar localmente, depois:
